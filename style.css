@@ -1,0 +1,81 @@
+.home_leftpane_line_rightborder {
+    position: absolute;
+    width: 2px;
+    height: 500px;
+    background: black;
+    margin-left: 100px;
+    transform: rotate(1.1deg);
+
+    mask-image: linear-gradient(
+        to bottom,
+        transparent,
+        black 10%,
+        black 90%,
+        transparent
+    );
+}
+
+.home_rightpane_line_rightborder {
+    position: absolute;
+    width: 4px;
+    height: 700px;
+    background: black;
+    margin-left: 450px;
+    margin-top: -425px;
+    transform: rotate(-1.5deg);
+
+    mask-image: linear-gradient(
+        to bottom,
+        transparent,
+        black 10%,
+        black 90%,
+        transparent
+    );
+}
+
+.words_poem_livestock {
+    margin-left: 150px;
+    margin-top: 35px;
+    transform: rotate(-5deg);
+}
+
+.words_poem_earbars {
+    margin-left: 25px;
+    margin-top: 70px;
+    transform: rotate(5deg);
+}
+
+.words_poem_empanada {
+    margin-left: 95px;
+    margin-top: -110px;
+    transform: rotate(-15deg);
+}
+
+.words_poem_moss {
+    margin-left: 220px;
+    margin-top: -115px;
+    transform: rotate(-40deg);
+}
+
+.words_poem_mooneyes {
+    font-size: 25px;
+    margin-left: 200px;
+    margin-top: 150px;
+    transform: rotate(0deg);
+}
+
+.bad_box {
+    position: absolute;
+    border: 1px solid black;
+    width: 180px;
+    height: 90px;
+    margin-left: 250px;
+    margin-top: -200px;
+    transform: rotate(-3deg);
+}
+
+.badbox2 {
+    margin-left: 50px;
+    margin-top: -5px;
+    transform: rotate(1deg);
+}
