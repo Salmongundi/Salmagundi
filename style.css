@@ -1,3 +1,29 @@
+
+/* #region GLOBAL */
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: black;
+    font-family: serif;
+    overflow: hidden;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+p {
+    margin: 0;
+}
+
+/* #endregion */
+
+/* #region 2026-09-05 */
 .home_leftpane_line_rightborder {
     position: absolute;
     width: 2px;
@@ -79,3 +105,307 @@
     margin-top: -5px;
     transform: rotate(1deg);
 }
+
+/* #endregion */
+
+/* #region 2026-09-07 */
+
+/* #region LINES */
+
+.div_20260907_01 {
+    position: absolute;
+
+    width: 1px;
+    height: 1000px;
+
+    left: 100px;
+    top: -80px;
+
+    background: black;
+
+    transform: rotate(50deg);
+
+    mask-image: linear-gradient(
+        to bottom,
+        transparent,
+        black 50%,
+        black 99%,
+        transparent
+    );
+
+    animation: lineone 19s ease-in-out infinite alternate;
+}
+
+@keyframes lineone {
+    from {
+        transform: translateX(0) rotate(50deg);
+    }
+
+    to {
+        transform: translateX(170px) rotate(47deg);
+    }
+}
+
+
+.div_20260907_02 {
+    position: absolute;
+
+    width: 3px;
+    height: 1000px;
+
+    left: 100px;
+    top: -170px;
+
+    background: black;
+
+    transform: rotate(-80deg);
+
+    mask-image: linear-gradient(
+        to bottom,
+        transparent,
+        black 10%,
+        black 20%,
+        transparent
+    );
+
+    animation: linetwo 27s linear infinite alternate;
+}
+
+@keyframes linetwo {
+    from {
+        transform: translateX(0) rotate(-80deg);
+    }
+
+    to {
+        transform: translateX(-100px) rotate(-74deg);
+    }
+}
+
+/* #endregion */
+
+/* #region ANIMALS */
+
+.words_20260907_animals {
+    position: absolute;
+
+    left: 285px;
+    top: 124px;
+
+    font-size: 42px;
+    letter-spacing: -12px;
+
+    white-space: nowrap;
+
+    transform: rotate(4deg);
+
+    animation: animals 6s steps(7) infinite alternate;
+}
+
+@keyframes animals {
+    0% {
+        transform: translate(0, 0) rotate(4deg);
+        letter-spacing: -12px;
+    }
+
+    50% {
+        transform: translate(-180px, 120px) rotate(-25deg);
+        letter-spacing: 8px;
+    }
+
+    100% {
+        transform: translate(250px, -80px) rotate(31deg);
+        letter-spacing: -20px;
+    }
+}
+
+/* #endregion */
+
+/* #region WORDS */
+.words_20260907_announcement {
+    position: absolute;
+    left: 37px;
+    top: 48px;
+    width: 245px;
+
+    font-size: 17px;
+    line-height: 1.05;
+
+    transform: rotate(-7deg);
+
+    animation: announcement 11s ease-in-out infinite alternate;
+    white-space: pre-line;
+}
+
+@keyframes announcement {
+    0% {
+        transform: translate(0px, 0px) rotate(-7deg) scaleY(.7);
+    }
+
+    50% {
+        transform: translate(83px, 41px) rotate(13deg) scaleY(1.4);
+    }
+
+    100% {
+        transform: translate(-20px, 90px) rotate(-2deg) scaleY(.85);
+    }
+}
+
+
+.words_20260907_privates {
+    position: absolute;
+    left: 390px;
+    top: 15px;
+
+    width: 150px;
+    font-size: 15px;
+    line-height: .9;
+
+    white-space: pre-line;
+
+    animation: privates 8s ease-in-out infinite;
+}
+
+@keyframes privates {
+    from {
+        transform: translateX(150px) rotate(-3deg);
+    }
+
+    to {
+        transform: translateX(-5px) rotate(10deg);
+    }
+}
+
+
+.words_20260907_dripping {
+    position: absolute;
+    left: 165px;
+    top: 330px;
+
+    width: 180px;
+    font-size: 18px;
+    line-height: 1.35;
+
+    transform: rotate(11deg);
+
+    animation: dripping 17s ease-in-out infinite alternate;
+    white-space: pre-line;
+}
+
+@keyframes dripping {
+    0% {
+        transform: translate(0, 0) rotate(11deg);
+    }
+
+    40% {
+        transform: translate(-70px, -110px) rotate(-4deg);
+    }
+
+    100% {
+        transform: translate(100px, 40px) rotate(17deg);
+    }
+}
+
+
+.words_20260907_dragonflies {
+    position: absolute;
+    left: 315px;
+    top: 210px;
+
+    width: 210px;
+    font-size: 16px;
+    line-height: 1;
+
+    transform: rotate(-13deg);
+
+    white-space: pre-line;
+
+    animation: dragonflies 21s linear infinite;
+}
+
+@keyframes dragonflies {
+    0% {
+        transform: translate(0, 0) rotate(-13deg);
+    }
+
+    25% {
+        transform: translate(-120px, 80px) rotate(23deg);
+    }
+
+    50% {
+        transform: translate(70px, 180px) rotate(-31deg);
+    }
+
+    75% {
+        transform: translate(160px, -60px) rotate(8deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(-13deg);
+    }
+}
+
+
+.words_20260907_never {
+    position: absolute;
+    left: 285px;
+    top: 140px;
+
+    width: 310px;
+    font-size: 13px;
+    line-height: .78;
+
+    transform: rotate(2deg);
+
+    white-space: pre-line;
+
+    animation: never 13s ease-in-out infinite alternate;
+}
+
+@keyframes never {
+    0% {
+        transform: translate(0, 0) rotate(2deg) scale(.8);
+    }
+
+    50% {
+        transform: translate(-45px, 100px) rotate(-9deg) scale(1.15);
+    }
+
+    100% {
+        transform: translate(90px, -25px) rotate(4deg) scale(.7);
+    }
+}
+
+
+.words_20260907_perceive {
+    position: absolute;
+    left: 145px;
+    top: 13px;
+
+    width: 190px;
+    font-size: 21px;
+    line-height: .9;
+
+    transform: rotate(-2deg);
+
+    white-space: pre-line;
+
+    animation: perceive 9s ease-in-out infinite alternate;
+}
+
+@keyframes perceive {
+    0% {
+        transform: translate(0, 0) rotate(-2deg);
+    }
+
+    50% {
+        transform: translate(100px, 210px) rotate(17deg);
+    }
+
+    100% {
+        transform: translate(-30px, 50px) rotate(-11deg);
+    }
+}
+
+/* #endregion */
+
+/* #endregion */
