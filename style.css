@@ -1,8 +1,4 @@
 
-body {
-    background: red !important;
-}
-
 /* #region GLOBAL */
 
 html, body {
@@ -266,7 +262,7 @@ p {
 
     white-space: pre-line;
 
-    animation: privates 8s ease-in-out infinite;
+    animation: privates 8s ease-in-out infinite alternate;
 }
 
 @keyframes privates {
@@ -323,7 +319,7 @@ p {
 
     white-space: pre-line;
 
-    animation: dragonflies 21s linear infinite;
+    animation: dragonflies 21s linear infinite alternate;
 }
 
 @keyframes dragonflies {
@@ -411,5 +407,130 @@ p {
 }
 
 /* #endregion */
+
+/* #endregion */
+
+/* #region 2026-09-08 */
+
+.words_20260908_ascii {
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    margin: 0;
+    font-family: monospace;
+    white-space: pre;
+    line-height: 1;
+    font-size: 10px;
+}
+
+.ascii-char {
+    display: inline-block;
+    white-space: pre;
+    position: relative;
+    transition: transform 0.08s ease-out;
+}
+
+.ascii-canvas {
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.words_20260907_humans {
+    position: absolute;
+    left: 150px;
+    top: 15px;
+
+    width: 250px;
+    font-size: 15px;
+    line-height: .9;
+
+    white-space: pre-line;
+
+    animation: privates 8s ease-in-out infinite alternate;
+}
+
+.words_20260908_simulac {
+    position: absolute;
+    left: -100px;
+    top: 80px;
+
+    width: 250px;
+    font-size: 15px;
+    line-height: .9;
+
+    white-space: pre-line;
+
+    animation: privates 8s ease-in-out infinite alternate;
+}
+
+.words_20260908_lacrums {
+    position: absolute;
+    left: 390px;
+    top: 45px;
+
+    width: 250px;
+    font-size: 15px;
+    line-height: .9;
+
+    white-space: pre-line;
+
+    animation: pendulum 8s ease-in-out infinite alternate;
+
+    --start-x: 145px;
+    --start-rotation: 4deg;
+    --end-x: -6px;
+    --end-rotation: 8deg;
+}
+
+.words_20260908_humanelest {
+    position: absolute;
+    left: 390px;
+    top: 450px;
+
+    width: 250px;
+    font-size: 15px;
+    line-height: .9;
+
+    white-space: pre-line;
+
+    animation: pendulum 6s ease-in-out infinite alternate;
+
+    --start-x: 150px;
+    --start-rotation: -3deg;
+    --end-x: -5px;
+    --end-rotation: 10deg;
+}
+
+@keyframes pendulum {
+    from {
+        transform:
+            translateX(var(--start-x))
+            rotate(var(--start-rotation));
+    }
+
+    to {
+        transform:
+            translateX(var(--end-x))
+            rotate(var(--end-rotation));
+    }
+}
+
+.gravity-poem {
+    position: relative;
+}
+
+.words_20260908_hug {
+    position: absolute;
+    left: 36px;
+    top: 450px;
+    font-size: 253px;
+    opacity: .3;
+    transform: rotate(-5deg);
+}
+
+
 
 /* #endregion */
