@@ -89,11 +89,9 @@ function asciiMousePanic(
     const name = element.dataset.ascii;
     element.textContent = ASCII[name];
 
-
     // Get the ASCII text
     const text = element.textContent.replace(/\r/g, "");
     const color = getComputedStyle(element).color;
-
 
     // Create canvas
     const canvas = document.createElement("canvas");
@@ -101,71 +99,48 @@ function asciiMousePanic(
 
     document.body.appendChild(canvas);
 
-
     // Tell frame animation that this element
     // is represented by a canvas
     element.dataset.panicCanvas = "true";
 
-
     const ctx = canvas.getContext("2d");
-
 
     // Character sizing
     const fontSize = size;
     const lineHeight = size;
     const charWidth = size * 0.6;
 
-
     const lines = text.split("\n");
-
 
     const width = Math.ceil(
         Math.max(...lines.map(line => line.length)) *
         charWidth
     );
 
-
     const height =
         lines.length * lineHeight;
-
 
     canvas.width = width;
     canvas.height = height;
 
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
 
-    canvas.style.width =
-        width + "px";
-
-    canvas.style.height =
-        height + "px";
-
-
-    ctx.font =
-        size + "px monospace";
-
-    ctx.textBaseline =
-        "top";
-
+    ctx.font = size + "px monospace";
+    ctx.textBaseline = "top";
 
     // Turn ASCII into individual characters
     const characters = [];
 
-
     lines.forEach((line, row) => {
 
-        for (
-            let col = 0;
-            col < line.length;
-            col++
-        ) {
+        for (let col = 0; col < line.length; col++) {
 
             const char = line[col];
 
             if (char === " ") continue;
 
-
             characters.push({
-
                 char: char,
 
                 x: col * charWidth,
@@ -178,47 +153,39 @@ function asciiMousePanic(
                 velocityY: 0,
 
                 rotation: 0
-
             });
 
         }
 
     });
 
-
     // Mouse position
     let mouseX = -1000;
     let mouseY = -1000;
 
+    document.addEventListener("mousemove", e => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
 
-    document.addEventListener(
-        "mousemove",
-        e => {
-
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-
-        }
-    );
-
-
-    // Hide the original <pre> permanently
+    // Hide original <pre>
     element.style.visibility = "hidden";
-
 
     // Start hidden
     canvas.style.visibility = "hidden";
 
-
     // Animation
     function animate() {
 
-        // Follow frame animation visibility
-        canvas.style.visibility =
-            element.dataset.panicVisible === "visible"
-                ? "visible"
-                : "hidden";
+        // Don't do ANY character calculations
+        // when this frame isn't visible.
+        if (element.dataset.panicVisible !== "visible") {
+            canvas.style.visibility = "hidden";
+            requestAnimationFrame(animate);
+            return;
+        }
 
+        canvas.style.visibility = "visible";
 
         ctx.clearRect(
             0,
@@ -227,15 +194,9 @@ function asciiMousePanic(
             canvas.height
         );
 
-
         ctx.fillStyle = color;
-
-        ctx.font =
-            size + "px monospace";
-
-        ctx.textBaseline =
-            "top";
-
+        ctx.font = size + "px monospace";
+        ctx.textBaseline = "top";
 
         characters.forEach(c => {
 
@@ -244,12 +205,10 @@ function asciiMousePanic(
                 c.x +
                 c.offsetX;
 
-
             const screenY =
                 50 +
                 c.y +
                 c.offsetY;
-
 
             const dx =
                 screenX - mouseX;
@@ -257,13 +216,8 @@ function asciiMousePanic(
             const dy =
                 screenY - mouseY;
 
-
             const distance =
-                Math.sqrt(
-                    dx * dx +
-                    dy * dy
-                );
-
+                Math.sqrt(dx * dx + dy * dy);
 
             if (
                 distance < effectRadius &&
@@ -274,43 +228,34 @@ function asciiMousePanic(
                     (effectRadius - distance) /
                     effectRadius;
 
-
                 c.velocityX +=
                     (dx / distance) *
                     panic *
                     force;
-
 
                 c.velocityY +=
                     (dy / distance) *
                     panic *
                     force;
 
-
                 c.velocityX +=
                     (Math.random() - 0.5) *
                     panic *
                     chaos;
-
 
                 c.velocityY +=
                     (Math.random() - 0.5) *
                     panic *
                     chaos;
 
-
                 c.rotation +=
                     (Math.random() - 0.5) *
                     panic *
                     rotationChaos;
-
             }
 
-
-            // Movement
             c.offsetX += c.velocityX;
             c.offsetY += c.velocityY;
-
 
             c.velocityX *= damping;
             c.velocityY *= damping;
@@ -320,19 +265,14 @@ function asciiMousePanic(
 
             c.rotation *= 0.90;
 
-
-            // Draw character
             ctx.save();
-
 
             ctx.translate(
                 c.x + c.offsetX,
                 c.y + c.offsetY
             );
 
-
             ctx.rotate(c.rotation);
-
 
             ctx.fillText(
                 c.char,
@@ -340,15 +280,12 @@ function asciiMousePanic(
                 0
             );
 
-
             ctx.restore();
 
         });
 
-
         requestAnimationFrame(animate);
     }
-
 
     animate();
 }

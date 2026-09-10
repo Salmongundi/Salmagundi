@@ -1,5 +1,4 @@
-
-// Loop through each ASCII image to create a gif effect. 
+// Loop through each ASCII image to create a gif effect.
 asciiFrameAnimation(
     [
         document.querySelector(".ascii1"),
@@ -14,7 +13,8 @@ asciiFrameAnimation(
     }
 );
 
-// Apply the panic effect to each of these ASCII elements.
+
+// Apply the panic effect to each ASCII element.
 [
     document.querySelector(".ascii1"),
     document.querySelector(".ascii2"),
@@ -27,13 +27,16 @@ asciiFrameAnimation(
         element,
         10,     // font size
         150,    // effectRadius
-        4,    // force
+        4,      // force
         2,      // chaos
         0.2,    // rotationChaos
         0.80    // damping
     );
 
-// Apply the gravity fall effect to each of these divs surrounding a poem.
+});
+
+
+// Apply the gravity fall effect to the poem.
 gravityFails(
     [
         document.querySelector(".gravity-poem-1")
@@ -44,5 +47,3 @@ gravityFails(
         fallDistance: 200
     }
 );
-
-});
