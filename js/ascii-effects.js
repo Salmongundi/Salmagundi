@@ -73,8 +73,6 @@ function asciiFrameAnimation(elements, settings = {}) {
     animate();
 }
 
-
-
 function asciiMousePanic(
     element,
     size = 10,

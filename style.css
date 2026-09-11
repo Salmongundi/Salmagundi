@@ -534,3 +534,35 @@ p {
 
 
 /* #endregion */
+
+/* #region 2026-09-10 Vision */
+
+
+/* Vision Effect */
+#vision-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+}
+
+.words_20260910_beef {
+    position: fixed;
+
+    pointer-events: none;
+    z-index: 10001;
+    width: max-content;
+
+    text-align: center;
+    font-size: 23px;
+    line-height: 1.35;
+
+    white-space: pre-line;
+}
+
+/* #endregion */
+
+/* #endregion */
