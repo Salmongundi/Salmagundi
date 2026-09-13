@@ -2,12 +2,63 @@ function asciiFrameAnimation(elements, settings = {}) {
 
     const frameDuration = settings.frameDuration ?? 1000;
     const reverseAtEnds = settings.reverseAtEnds ?? true;
+    const wind = settings.wind ?? false;
 
     // Load ASCII artwork
     elements.forEach(element => {
 
         const name = element.dataset.ascii;
-        element.textContent = ASCII[name];
+        const text = ASCII[name].replace(/\r/g, "");
+
+        if (wind) {
+
+            const lines = text.split("\n");
+            const maxRows = Math.max(lines.length - 1, 1);
+
+            element.innerHTML = "";
+
+            lines.forEach((line, row) => {
+
+                const rowElement = document.createElement("span");
+                rowElement.className = "ascii-wind-row";
+
+                // More movement toward the top.
+                const strength =
+                    ((row - maxRows) / maxRows) * -1;
+
+                rowElement.style.setProperty(
+                    "--wind-strength",
+                    strength
+                );
+
+                rowElement.style.setProperty(
+                    "--wind-delay",
+                    `${row * -0.08}s`
+                );
+
+                for (let col = 0; col < line.length; col++) {
+
+                    const char = document.createElement("span");
+
+                    char.className = "ascii-wind-char";
+
+                    char.textContent =
+                        line[col] === " "
+                            ? "\u00A0"
+                            : line[col];
+
+                    rowElement.appendChild(char);
+                }
+
+                element.appendChild(rowElement);
+                element.appendChild(document.createElement("br"));
+            });
+
+        } else {
+
+            element.textContent = ASCII[name];
+
+        }
 
         // If this element has a panic canvas,
         // the canvas will handle visibility instead.
@@ -17,7 +68,7 @@ function asciiFrameAnimation(elements, settings = {}) {
     });
 
 
-    let startTime = performance.now();
+    let startTime = performance.now() + (settings.startDelay ?? 0);
 
 
     function animate() {
@@ -71,6 +122,47 @@ function asciiFrameAnimation(elements, settings = {}) {
 
 
     animate();
+}
+
+function asciiWind(element, settings = {}) {
+
+    const amplitude = settings.amplitude ?? 5;
+    const speed = settings.speed ?? 0.004;
+    const wavelength = settings.wavelength ?? 18;
+
+    const name = element.dataset.ascii;
+    const text = ASCII[name].replace(/\r/g, "");
+
+    const lines = text.split("\n");
+
+    element.innerHTML = "";
+
+    lines.forEach((line, row) => {
+
+        for (let col = 0; col < line.length; col++) {
+
+            const char = line[col];
+
+            const span = document.createElement("span");
+
+            span.className = "ascii-wind-char";
+            span.textContent = char === " " ? "\u00A0" : char;
+
+            span.style.setProperty(
+                "--wind-delay",
+                `${(col + row * 0.5) * -0.035}s`
+            );
+
+            span.style.setProperty(
+                "--wind-distance",
+                `${Math.sin(col / wavelength) * amplitude}px`
+            );
+
+            element.appendChild(span);
+        }
+
+        element.appendChild(document.createElement("br"));
+    });
 }
 
 function asciiMousePanic(
