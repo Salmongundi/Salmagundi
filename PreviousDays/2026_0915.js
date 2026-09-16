@@ -1,3 +1,4 @@
+const customCursor = document.getElementById("custom-cursor");
 const asciiElement = document.getElementById("ascii");
 const dialogueElement = document.getElementById("dialogue");
 const choiceArea = document.getElementById("choice-area");
@@ -25,7 +26,7 @@ const headEmoji = document.getElementById("head-emoji");
    "scooter"
    ========================================================= */
 
-const TEST_MODE = "hands";
+const TEST_MODE = "";
 
 
 const emojiChoices = [
@@ -121,6 +122,54 @@ function showTheEnd() {
 
 let openingIndex = 0;
 
+/* =========================================================
+   CUSTOM CURSOR
+   ========================================================= */
+
+function colorCursorArt(art) {
+    return art
+        .split("")
+        .map(character => {
+            if (character === "=") {
+                return `<span class="cursor-cyan">=</span>`;
+            }
+
+            if (character === " ") {
+                return " ";
+            }
+
+            return `<span>${character}</span>`;
+        })
+        .join("");
+}
+
+
+function setCursorArt(art) {
+    customCursor.innerHTML = colorCursorArt(art);
+}
+
+
+function moveCustomCursor(event) {
+    customCursor.style.left = `${event.clientX}px`;
+    customCursor.style.top = `${event.clientY}px`;
+}
+
+
+function cursorDown() {
+    setCursorArt(ASCII.ascii_20260915_Cursor_Clicked);
+}
+
+
+function cursorUp() {
+    setCursorArt(ASCII.ascii_20260915_Cursor_Unclicked);
+}
+
+
+setCursorArt(ASCII.ascii_20260915_Cursor_Unclicked);
+
+document.addEventListener("mousemove", moveCustomCursor);
+document.addEventListener("mousedown", cursorDown);
+document.addEventListener("mouseup", cursorUp);
 
 function startGame() {
     showAscii(ASCII.ascii_20260915_Horseman_01);

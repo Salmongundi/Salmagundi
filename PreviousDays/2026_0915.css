@@ -16,6 +16,40 @@
     --emoji-size: 42px;
 }
 
+/* CUSTOM CURSOR */
+
+html,
+body {
+    cursor: none;
+}
+
+#custom-cursor {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    margin: 0;
+
+    font-family: monospace;
+    font-size: 5px;
+    font-weight: bold;
+    line-height: 1;
+
+    white-space: pre;
+
+    color: black;
+
+    pointer-events: none;
+    user-select: none;
+
+    z-index: 1000;
+}
+
+#custom-cursor .cursor-cyan {
+    color: #5db6cf;
+}
+
 /* PREVIOUS DAY LINK */
 #previous-page {
     position: absolute;
@@ -177,14 +211,49 @@
 }
 
 #dialogue {
-    cursor: pointer;
+    position: relative;
+
+    cursor: none;
     font-size: var(--dialogue-font-size);
 }
 
 #dialogue p {
+    position: relative;
+
+    display: inline-block;
+
     margin: 0 0 10px 0;
 }
 
+#dialogue p::before,
+#dialogue p::after {
+    position: absolute;
+
+    opacity: 0;
+
+    color: #5db6cf;
+
+    pointer-events: none;
+
+    transition: opacity 0.05s;
+}
+
+#dialogue p::before {
+    content: "=";
+    right: 100%;
+    margin-right: 6px;
+}
+
+#dialogue p::after {
+    content: "=";
+    left: 100%;
+    margin-left: 6px;
+}
+
+#dialogue p:hover::before,
+#dialogue p:hover::after {
+    opacity: 1;
+}
 
 /* HANDS */
 
@@ -452,7 +521,9 @@
 /* YES / NO */
 
 .binary-choice {
-    padding: 3px 10px;
+    position: relative;
+
+    padding: 3px 18px;
 
     border: 0;
     background: transparent;
@@ -460,9 +531,33 @@
     font-family: serif;
     font-size: 22px;
 
-    cursor: pointer;
+    cursor: none;
 }
 
-.binary-choice:hover {
-    text-decoration: underline;
+.binary-choice::before,
+.binary-choice::after {
+    position: absolute;
+
+    opacity: 0;
+
+    color: #5db6cf;
+
+    pointer-events: none;
+
+    transition: opacity 0.05s;
+}
+
+.binary-choice::before {
+    content: "=";
+    right: 100%;
+}
+
+.binary-choice::after {
+    content: "=";
+    left: 100%;
+}
+
+.binary-choice:hover::before,
+.binary-choice:hover::after {
+    opacity: 1;
 }
