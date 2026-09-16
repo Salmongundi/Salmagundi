@@ -4,8 +4,8 @@
     --ascii-font-size: 10px;
 
     --head-size: 100px;
-    --head-x: -100px;
-    --head-y: -40px;
+    --head-x: 100px;
+    --head-y: 0px;
 
     --dialogue-width: 700px;
     --dialogue-font-size: 18px;
@@ -120,9 +120,6 @@ body {
 
 #head-emoji {
     position: absolute;
-
-    left: 50%;
-    top: 25%;
 
     font-family: sans-serif;
     font-size: var(--head-size);

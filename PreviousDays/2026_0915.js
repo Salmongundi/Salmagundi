@@ -26,7 +26,7 @@ const headEmoji = document.getElementById("head-emoji");
    "scooter"
    ========================================================= */
 
-const TEST_MODE = "";
+const TEST_MODE = "hands";
 
 
 const emojiChoices = [
@@ -49,7 +49,10 @@ const openingLines = [
 function showAscii(art) {
     asciiElement.textContent = art;
 
-    requestAnimationFrame(fitAsciiToArea);
+    requestAnimationFrame(() => {
+        fitAsciiToArea();
+        positionHeadOverAscii();
+    });
 }
 
 
@@ -72,6 +75,82 @@ function fitAsciiToArea() {
     const scale = Math.min(1, widthScale, heightScale);
 
     asciiElement.style.transform = `scale(${scale})`;
+
+    requestAnimationFrame(positionHeadOverAscii);
+}
+
+
+function positionHeadOverAscii() {
+    if (!asciiElement.textContent || !headEmoji.textContent) {
+        return;
+    }
+
+    const area = document.getElementById("ascii-area");
+    const text = asciiElement.firstChild;
+
+    if (!text) {
+        return;
+    }
+
+    /*
+       The head is positioned directly over the first
+       continuous run of @ characters in the ASCII.
+    */
+
+    const lines = asciiElement.textContent.split("\n");
+
+    let lineStart = 0;
+    let targetLine = -1;
+    let targetStart = -1;
+    let targetEnd = -1;
+
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const firstAt = line.indexOf("@");
+
+        if (firstAt !== -1) {
+            let endAt = firstAt;
+
+            while (endAt < line.length && line[endAt] === "@") {
+                endAt++;
+            }
+
+            targetLine = i;
+            targetStart = lineStart + firstAt;
+            targetEnd = lineStart + endAt;
+
+            break;
+        }
+
+        lineStart += line.length + 1;
+    }
+
+    if (targetLine === -1) {
+        return;
+    }
+
+    const range = document.createRange();
+
+    range.setStart(text, targetStart);
+    range.setEnd(text, targetEnd);
+
+    const rect = range.getBoundingClientRect();
+    const areaRect = area.getBoundingClientRect();
+
+    const targetX = rect.left + rect.width / 2 - areaRect.left;
+    const targetY = rect.top - areaRect.top;
+
+    /*
+       These must be zero because targetX/targetY are already
+       the correct calculated position. The ghost-head animation
+       should only wobble around that position.
+    */
+
+    headEmoji.style.setProperty("--head-x", "-70px");
+    headEmoji.style.setProperty("--head-y", "-15px");
+
+    headEmoji.style.left = `${targetX}px`;
+    headEmoji.style.top = `${targetY}px`;
 }
 
 
@@ -122,6 +201,7 @@ function showTheEnd() {
 
 let openingIndex = 0;
 
+
 /* =========================================================
    CUSTOM CURSOR
    ========================================================= */
@@ -170,6 +250,7 @@ setCursorArt(ASCII.ascii_20260915_Cursor_Unclicked);
 document.addEventListener("mousemove", moveCustomCursor);
 document.addEventListener("mousedown", cursorDown);
 document.addEventListener("mouseup", cursorUp);
+
 
 function startGame() {
     showAscii(ASCII.ascii_20260915_Horseman_01);
@@ -289,6 +370,9 @@ function startTestMode() {
 function showTestHead(emoji) {
     headEmoji.textContent = emoji;
     headEmoji.classList.add("visible");
+
+    positionHeadOverAscii();
+
     clearChoices();
 }
 
@@ -338,6 +422,8 @@ function showEmojiChoice() {
 function chooseHead(emoji) {
     headEmoji.textContent = emoji;
     headEmoji.classList.add("visible");
+
+    positionHeadOverAscii();
 
     clearChoices();
 
