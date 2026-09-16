@@ -320,7 +320,7 @@ body {
     font-size: var(--emoji-size);
     line-height: 1;
 
-    cursor: pointer;
+    cursor: none;
     user-select: none;
 
     pointer-events: auto;
@@ -328,7 +328,6 @@ body {
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
 }
-
 
 /*
    Move ALL emojis up/down together here.
