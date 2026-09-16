@@ -26,7 +26,7 @@ const headEmoji = document.getElementById("head-emoji");
    "scooter"
    ========================================================= */
 
-const TEST_MODE = "hands";
+const TEST_MODE = "";
 
 
 const emojiChoices = [
